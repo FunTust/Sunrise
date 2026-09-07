@@ -41,6 +41,9 @@
          builtin. MSVC refuses the same define as a reserved name, so it stays on this pass. -->
     <ClangTidyPrependExtraArgs>-D_CRT_USE_BUILTIN_OFFSETOF $(ClangTidyPrependExtraArgs)</ClangTidyPrependExtraArgs>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -52,7 +55,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)vendor\detours;$(ProjectDir)vendor\lua;$(ProjectDir)vendor\sqlite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;WIN32_LEAN_AND_MEAN;NOMINMAX;IMGUI_USER_CONFIG=&quot;core/ui/imgui_user_config.h&quot;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;WIN32_LEAN_AND_MEAN;NOMINMAX;IMGUI_USER_CONFIG="core/ui/imgui_user_config.h";%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -239,10 +242,12 @@
     <ClCompile Include="src\client\hooks\inactivity\inactivity_override.cpp" />
     <ClCompile Include="src\client\ui\player\player_panel.cpp" />
     <ClCompile Include="src\client\player\player_position.cpp" />
+    <ClCompile Include="src\client\player\controlled_object.cpp" />
     <ClCompile Include="src\client\player\player_settings_store.cpp" />
     <ClCompile Include="src\client\hooks\noclip\horizontal_noclip.cpp" />
     <ClCompile Include="src\client\hooks\sword_skate\sword_skate.cpp" />
     <ClCompile Include="src\client\hooks\fly\fly.cpp" />
+    <ClCompile Include="src\client\hooks\turn_back\turn_back.cpp" />
     <ClCompile Include="src\client\hooks\infinite_ammo\infinite_ammo.cpp" />
     <ClCompile Include="src\client\input\window_focus.cpp" />
     <ClCompile Include="src\client\hooks\teleport\teleport_lifecycle.cpp" />
@@ -995,9 +1000,9 @@
     <ClCompile Include="src\middleware\bap\activity_message\activity_entity_slots_decoder.cpp" />
     <ClCompile Include="src\middleware\bap\activity_message\activity_entity_authority_parser.cpp" />
     <ClCompile Include="src\middleware\bap\activity_message\activity_incident_encoder.cpp" />
-      <ClCompile Include="src\middleware\bap\activity_message\activity_incident_parser.cpp" />
-      <ClCompile Include="src\middleware\bap\activity_message\activity_cinematic_incident_codec.cpp" />
-      <ClCompile Include="src\middleware\bap\activity_message\activity_player_trigger_incident_codec.cpp" />
+    <ClCompile Include="src\middleware\bap\activity_message\activity_incident_parser.cpp" />
+    <ClCompile Include="src\middleware\bap\activity_message\activity_cinematic_incident_codec.cpp" />
+    <ClCompile Include="src\middleware\bap\activity_message\activity_player_trigger_incident_codec.cpp" />
     <ClCompile Include="src\middleware\bap\activity_message\activity_entity_slots_encoder.cpp" />
     <ClCompile Include="src\middleware\bap\activity_message\wire_schema\activity_communication_route.cpp" />
     <ClCompile Include="src\middleware\bap\activity_message\wire_schema\activity_wire_codec.cpp" />
@@ -1311,10 +1316,12 @@
     <ClInclude Include="src\client\hooks\inactivity\inactivity_override.h" />
     <ClInclude Include="src\client\ui\player\player_panel.h" />
     <ClInclude Include="src\client\player\player_position.h" />
+    <ClInclude Include="src\client\player\controlled_object.h" />
     <ClInclude Include="src\client\player\player_settings_store.h" />
     <ClInclude Include="src\client\hooks\noclip\runtime.h" />
     <ClInclude Include="src\client\hooks\sword_skate\sword_skate.h" />
     <ClInclude Include="src\client\hooks\fly\fly.h" />
+    <ClInclude Include="src\client\hooks\turn_back\turn_back.h" />
     <ClInclude Include="src\client\hooks\infinite_ammo\infinite_ammo.h" />
     <ClInclude Include="src\client\input\window_focus.h" />
     <ClInclude Include="src\client\hooks\teleport\internal.h" />
