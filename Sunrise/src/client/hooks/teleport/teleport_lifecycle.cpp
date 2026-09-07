@@ -254,7 +254,7 @@ __declspec(noinline) void invoke_sync_body(void* component) noexcept {
                          replacementActive
                              ? "ev=teleport stage=uninstall result=fail reason=active"
                              : "ev=teleport stage=uninstall result=fail reason=detach");
-        return;
+        return false;
     }
     g_handles = {};
     g_installed.store(false, std::memory_order_release);
