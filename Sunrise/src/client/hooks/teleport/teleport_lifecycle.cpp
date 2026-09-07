@@ -246,7 +246,6 @@ __declspec(noinline) void invoke_sync_body(void* component) noexcept {
     hooks::fly::reset();
     client::player::position::reset();
     polled_input::release_key();
-<<<<<<< Updated upstream
     // A thread still inside a replacement keeps the detours; the cleared targets make them inert.
     bool replacementActive = false;
     if (!hooking::detour::uninstall(g_handles, replacementActive)) {
@@ -258,7 +257,6 @@ __declspec(noinline) void invoke_sync_body(void* component) noexcept {
         return;
     }
     g_handles = {};
-=======
     g_installed.store(false, std::memory_order_release);
     return true;
 }
@@ -287,7 +285,6 @@ bool uninstall() noexcept {
     const bool removed = uninstall_locked();
     ReleaseSRWLockExclusive(&g_lifecycleLock);
     return removed;
->>>>>>> Stashed changes
 }
 
 } // namespace sunrise::client::hooks::teleport
